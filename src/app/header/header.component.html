@@ -1,0 +1,12 @@
+<nav class="navbar bg-body-tertiary">
+    <div class="container-fluid">
+        <a class="navbar-brand">Amazon Cognito</a>
+        <div class="d-flex">
+            <a routerLink="/signup" class="btn btn-primary me-2 btn-sm" role="button" [hidden]="userState">SignUp</a>
+            <a routerLink="/signin" class="btn btn-primary me-2 btn-sm" role="button" [hidden]="userState">SignIn</a>
+            <a routerLink="/resetpwd" class="btn btn-secondary me-2 btn-sm" role="button" [hidden]="!userState">Reset
+                Password</a>
+            <a (click)="signOut()" class="btn btn-secondary me-2 btn-sm" role="button" [hidden]="!userState">Logout</a>
+        </div>
+    </div>
+</nav>

@@ -1,0 +1,104 @@
+<div class="row justify-content-center my-5" *ngIf="!forgotPwd">
+    <div class="col-4">
+        <div class="card">
+            <form [formGroup]="pwdResetForm" (ngSubmit)="onSubmit()">
+                <div class="card-body">
+                    <h5 class="card-title">Reset Your Password</h5>
+                    <div class="row">
+                        <div class="col mb-2">
+                            <label for="oldPassword" class="form-label">Old Password:</label>
+                            <div class="input-group">
+                                <div *ngIf="!oldPwdView" class="input-group-text" id="btnGroupAddon"
+                                    (click)=" oldPwdView = !oldPwdView"><i class="bi bi-eye-slash"></i></div>
+                                <div *ngIf="oldPwdView" class="input-group-text" id="btnGroupAddon"
+                                    (click)=" oldPwdView = !oldPwdView"><i class="bi bi-eye"></i></div>
+                                <input type="{{ oldPwdView ? 'text' : 'password'}}" class="form-control form-control-sm"
+                                    id="oldPassword" placeholder="Oldpassword" name="oldPassword"
+                                    aria-label="Input group example" aria-describedby="btnGroupAddon"
+                                    formControlName="oldPassword">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col mb-2">
+                            <label for="inputPassword" class="form-label">New Password:</label>
+                            <div class="input-group">
+                                <div *ngIf="!newPwdView" class="input-group-text" id="btnGroupAddon"
+                                    (click)=" newPwdView = !newPwdView"><i class="bi bi-eye-slash"></i></div>
+                                <div *ngIf="newPwdView" class="input-group-text" id="btnGroupAddon"
+                                    (click)=" newPwdView = !newPwdView"><i class="bi bi-eye"></i></div>
+                                <input type="{{ newPwdView ? 'text' : 'password'}}" class="form-control form-control-sm"
+                                    id="inputPassword" placeholder="Newpassword" name="newPassword"
+                                    aria-label="Input group example" aria-describedby="btnGroupAddon"
+                                    formControlName="newPassword">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col d-grid">
+                            <button type="submit" [disabled]="pwdResetForm.invalid" class="btn btn-sm btn-success">
+                                Procced to Change Password
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<div class="row justify-content-center my-5" *ngIf="forgotPwd">
+    <div class="col-4">
+        <div class="card">
+            <form [formGroup]="forgotPwdForm" (ngSubmit)="onForgotPwd()">
+                <div class="card-body">
+                    <h5 class="card-title">Forgot your Password?</h5>
+                    <div class="row">
+                        <div class="col mb-2">
+                            <label for="username" class="form-label">Username:</label>
+                            <input type="text" id="username" name="username" class="form-control form-control-sm"
+                                formControlName="username">
+                        </div>
+                    </div>
+                    <div class="row" *ngIf="verifnCode">
+                        <div class="col mb-2">
+                            <label for="code" class="form-label">Code:</label>
+                            <input type="text" id="code" name="code" class="form-control form-control-sm"
+                                formControlName="code">
+                        </div>
+                    </div>
+                    <div class="row" *ngIf="verifnCode">
+                        <div class="col mb-2">
+                            <label for="newPassword" class="form-label">New Password:</label>
+                            <div class="input-group">
+                                <div *ngIf="!newPwdView" class="input-group-text" id="btnGroupAddon"
+                                    (click)=" newPwdView = !newPwdView"><i class="bi bi-eye-slash"></i></div>
+                                <div *ngIf="newPwdView" class="input-group-text" id="btnGroupAddon"
+                                    (click)=" newPwdView = !newPwdView"><i class="bi bi-eye"></i></div>
+                                <input type="{{ newPwdView ? 'text' : 'password'}}" class="form-control form-control-sm"
+                                    id="inputPassword" placeholder="Newpassword" name="newPassword"
+                                    aria-label="Input group example" aria-describedby="btnGroupAddon"
+                                    formControlName="newPassword">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row" *ngIf="!verifnCode">
+                        <div class="col d-grid">
+                            <button type="submit" class="btn btn-sm btn-success"
+                                [disabled]="!forgotPwdForm.get('username')?.valid" (click)="onSendVerificationCode()">
+                                Procced to send verification code
+                            </button>
+                        </div>
+                    </div>
+                    <div class="row" *ngIf="verifnCode">
+                        <div class="col d-grid">
+                            <button type="submit" [disabled]="forgotPwdForm.invalid" class="btn btn-sm btn-success">
+                                Procced to Change Password
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
